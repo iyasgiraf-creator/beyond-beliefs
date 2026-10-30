@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09080d">
+<title>Beyond Beliefs — Aswathi & Shareef</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<style>
+:root{
+  --bg:#09080d;
+  --gold:#cba86a;
+  --cream:#f3e5c8;
+  --text:#f6f0e7;
+  --muted:#b1a7b8;
+  --purple:#a577df;
+  --line:rgba(217,190,145,.2);
+  --glass:rgba(25,20,35,.53);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Manrope,sans-serif;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 12% 20%,#783bb823,transparent 42%),
+    radial-gradient(ellipse at 88% 70%,#6f3ba51c,transparent 45%);
+}
+main,footer{position:relative}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+button,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--gold);outline-offset:5px;
+}
+h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:400}
+.signature{font-family:"Mrs Saint Delafield",cursive}
+.label{
+  font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  line-height:2;color:var(--gold);
+}
+[hidden]{display:none!important}
+
+/* FROSTED GLASS */
+.glass{
+  position:relative;isolation:isolate;
+  background:
+    linear-gradient(135deg,#ffffff12,#ffffff04 45%,#af80dc0e),
+    var(--glass);
+  border:1px solid #ffffff21;
+  -webkit-backdrop-filter:blur(24px) saturate(150%);
+  backdrop-filter:blur(24px) saturate(150%);
+  box-shadow:
+    0 18px 55px #0003,
+    inset 0 1px 0 #ffffff21,
+    inset 0 -1px 0 #ffffff06;
+}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  pointer-events:none;z-index:-1;
+  background:radial-gradient(
+    350px circle at var(--mx,25%) var(--my,0%),
+    #ffffff13,transparent 65%
+  );
+}
+.glass::after{
+  content:"";position:absolute;top:0;left:12%;right:12%;
+  height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,#ffffff52,transparent);
+}
+@supports not (backdrop-filter:blur(1px)){
+  .glass{background:#211b2c}
+}
+.gold{
+  background:linear-gradient(
+    110deg,#aa8145 5%,#f2dfb6 30%,#d1b2ed 48%,
+    #cba365 68%,#f5e4bc 86%,#aa8145
+  );
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:gold-flow 15s linear infinite;
+}
+.progress{
+  position:fixed;top:0;left:0;width:0;height:2px;z-index:100;
+  background:linear-gradient(90deg,#b08be0,#e1c28b);
+  box-shadow:0 0 14px #b08be055;
+}
+
+/* HEADER */
+.site-header{
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 64px);max-width:1400px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;border-radius:24px;z-index:60;
+}
+.site-header .signature{
+  font-size:35px;color:var(--cream);line-height:1;
+}
+nav{display:flex;align-items:center;gap:30px}
+nav a{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  transition:color .3s;
+}
+nav a:hover{color:var(--gold)}
+nav .nav-invite{
+  padding:12px 18px;border:1px solid #d8b98338;
+  border-radius:30px;background:#cba86a0b;
+}
+
+/* HERO — SEPARATE ROWS, NO PORTRAIT/TEXT OVERLAP */
+.hero{
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding:155px 24px 45px;
+  background:
+    radial-gradient(ellipse at 75% 32%,#7039a832,transparent 45%),
+    radial-gradient(ellipse at 20% 70%,#3b236c44,transparent 45%);
+}
+.hero::before{
+  content:"";position:absolute;inset:135px 35px 25px;
+  border:1px solid #d6b9861d;border-radius:48% 48% 0 0;
+  pointer-events:none;
+}
+.aurora{
+  position:absolute;left:50%;top:45%;width:1100px;height:950px;
+  transform:translate(-50%,-40%);filter:blur(35px);pointer-events:none;
+  background:
+    radial-gradient(ellipse at 30% 40%,#9d62da38,transparent 48%),
+    radial-gradient(ellipse at 70% 60%,#bc925522,transparent 48%);
+  animation:aurora 14s ease-in-out infinite alternate;
+}
+.hero-copy{
+  position:relative;z-index:4;width:100%;flex-shrink:0;
+}
+.hero h1{
+  font-size:clamp(82px,12vw,170px);
+  letter-spacing:-5px;line-height:.88;margin:25px 0;
+}
+.hero h1 em{font-weight:400}
+.hero .subtitle{
+  font-size:11px;letter-spacing:2px;line-height:2;
+  color:#d8c3e8;margin:20px auto 0;max-width:600px;padding:0 20px;
+}
+.hero-copy>*{animation:enter 1.5s both}
+.hero-copy>:nth-child(2){animation-delay:.18s}
+.hero-copy>:nth-child(3){animation-delay:.35s}
+
+/* Portrait stage has its own position in normal document flow. */
+.portrait-stage{
+  position:relative;
+  width:min(930px,100%);
+  margin:55px auto 0;
+  flex-shrink:0;
+}
+.halo{
+  position:absolute;
+  top:50%;left:50%;
+  width:590px;height:590px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:1px solid #cfad6b55;
+  background:radial-gradient(ellipse,#9559ca1c,transparent 67%);
+  box-shadow:-35px 0 100px #8d4ac81a,35px 0 100px #c7a15c0c;
+  pointer-events:none;
+}
+.halo::before{
+  content:"";position:absolute;inset:18px;
+  border:1px solid #b18ade27;border-radius:50%;
+}
+.halo::after{
+  content:"✦";position:absolute;inset:-13px;color:var(--cream);
+  font-size:24px;animation:orbit 50s linear infinite;
+}
+.portraits{
+  position:relative;
+  z-index:3;
+  width:min(880px,100%);
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:end;
+  gap:48px;
+}
+.person{
+  position:relative;
+  width:100%;
+  min-width:0;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  filter:drop-shadow(0 18px 30px #0006);
+}
+.person img{
+  position:static;
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:510px;
+  object-fit:contain;
+  object-position:center bottom;
+}
+.portrait-label{
+  position:static;
+  margin-top:15px;
+  line-height:1.3;
+  font:30px "Mrs Saint Delafield",cursive;
+  color:var(--cream);
+}
+.hero-bottom{
+  position:relative;
+  z-index:4;
+  width:100%;
+  margin-top:42px;
+  flex-shrink:0;
+}
+.hero-names{
+  font:36px "Mrs Saint Delafield",cursive;
+  color:var(--cream);margin-bottom:18px;
+}
+.date-pill{
+  display:inline-block;padding:12px 23px;border-radius:40px;
+  font-size:10px;letter-spacing:4px;color:var(--cream);
+}
+.scroll-link{
+  display:block;margin-top:22px;font-size:8px;letter-spacing:2.5px;
+}
+.scroll-link span{
+  display:inline-block;margin-left:10px;color:var(--gold);
+  animation:bob 2s infinite;
+}
+.starfield{position:absolute;inset:0;pointer-events:none}
+.starfield i{
+  position:absolute;width:2px;height:2px;border-radius:50%;
+  background:#ead5a6;box-shadow:0 0 8px #cba86a;
+  animation:twinkle var(--duration) ease-in-out infinite;
+  animation-delay:var(--delay);
+}
+.starfield i:nth-child(3n){
+  background:#d9c0ff;box-shadow:0 0 10px #ac80df;
+}
+
+/* INTRO */
+.intro{
+  text-align:center;padding:100px 8% 70px;max-width:950px;margin:auto;
+}
+.intro h2{
+  font-size:clamp(43px,5.6vw,75px);line-height:1.08;margin:25px 0;
+}
+.intro p{
+  font-size:12px;line-height:2;color:var(--muted);
+  max-width:490px;margin:25px auto;
+}
+.ornament{font-size:30px;color:var(--gold);margin:30px}
+
+/* STORY */
+.story-window{position:relative}
+.story-track{
+  position:relative;max-width:1250px;margin:auto;padding:0 5%;
+}
+.chapter{
+  display:grid;grid-template-columns:1fr 1fr;gap:8%;
+  align-items:center;min-height:610px;position:relative;
+}
+.copy{padding:35px;border-radius:28px}
+.chapter .number{
+  display:block;font:italic 18px "Cormorant Garamond",serif;
+  color:#c7a5e6;margin-bottom:24px;
+}
+.chapter h3{
+  font-size:clamp(39px,4.1vw,59px);line-height:1.05;margin:20px 0;
+}
+.chapter p{
+  font-size:12px;line-height:2;color:var(--muted);max-width:370px;
+}
+.scene{
+  position:relative;aspect-ratio:1;display:grid;place-items:center;
+  background:
+    radial-gradient(circle at 45% 45%,#8150b927,transparent 63%),
+    radial-gradient(circle at 65% 65%,#cba86a10,transparent 56%);
+}
+.scene>svg{width:100%;overflow:visible}
+.scene .art-ring{
+  stroke:#b18cdd;stroke-dasharray:2 12;
+  transform-origin:200px 190px;animation:orbit 100s linear infinite;
+}
+.scene .floating{animation:bob 7s ease-in-out infinite}
+.scene .spark{animation:twinkle 3s infinite}
+.scene .draw{stroke-dasharray:1600}
+.js .scene .draw{
+  stroke-dashoffset:1600;
+  transition:stroke-dashoffset 4s cubic-bezier(.22,.61,.36,1);
+}
+.js .scene.visible .draw{stroke-dashoffset:0}
+.scene-caption{
+  position:absolute;bottom:0;left:0;right:0;text-align:center;
+  font:30px "Mrs Saint Delafield",cursive;color:#cdb2e4;rotate:-5deg;
+}
+.story-navigation{display:none}
+
+/* VOW */
+.marquee{
+  overflow:hidden;margin-top:35px;padding:24px 0;
+  border-block:1px solid #aa83cc25;
+  background:linear-gradient(90deg,#24143222,#38204430,#24143222);
+}
+.marquee-track{
+  display:flex;width:max-content;animation:marquee 48s linear infinite;
+}
+.marquee-track span{
+  font:italic 40px "Cormorant Garamond",serif;
+  color:var(--gold);padding-right:40px;
+}
+.vow{
+  position:relative;overflow:hidden;min-height:75svh;padding:115px 8%;
+  display:grid;place-content:center;text-align:center;
+  background:
+    radial-gradient(ellipse at 20% 65%,#743bad2e,transparent 48%),
+    radial-gradient(ellipse at 80% 35%,#9b6ee81c,transparent 45%);
+}
+.vow::before{
+  content:"";position:absolute;width:600px;height:600px;
+  left:-350px;top:10%;border:1px solid #ac84dd25;border-radius:50%;
+  box-shadow:0 0 0 55px #ac84dd08,0 0 0 110px #ac84dd05;
+  pointer-events:none;
+}
+.vow h2{
+  font-size:clamp(50px,7vw,92px);line-height:1.05;margin:30px 0;
+}
+.vow p{
+  max-width:570px;margin:0 auto 25px;font-size:13px;
+  line-height:2;color:var(--muted);
+}
+.vow .signature{font-size:42px;color:#cfb2ea}
+
+/* INVITATION */
+.invitation-wrap{
+  padding:30px 24px 70px;position:relative;
+  background:radial-gradient(ellipse at 75% 40%,#793fb22a,transparent 52%);
+}
+.invitation{
+  max-width:1100px;margin:auto;padding:70px 6% 35px;
+  border-radius:38px;text-align:center;
+}
+.invitation h2{
+  font-size:clamp(48px,6vw,78px);margin:20px 0 25px;
+}
+.invitation .welcome{
+  font-size:13px;line-height:2;color:var(--muted);
+  max-width:580px;margin:0 auto 40px;
+}
+.monogram{
+  font:italic 44px "Cormorant Garamond",serif;
+  color:var(--gold);margin-bottom:28px;
+}
+.event{
+  display:grid;grid-template-columns:1fr 1.05fr 1fr;
+  align-items:center;border-block:1px solid var(--line);padding:26px 0;
+}
+.event h3{font-size:27px;margin:15px 0}
+.event p{font-size:11px;line-height:1.9;color:var(--muted)}
+.date-block{border-inline:1px solid var(--line);padding:10px}
+.date-block .day{
+  font:100px/.95 "Cormorant Garamond",serif;color:var(--cream);
+}
+.date-block .month{
+  font:italic 31px "Cormorant Garamond",serif;
+  color:var(--gold);margin:10px;
+}
+.day-counter{
+  display:inline-flex;align-items:center;gap:17px;
+  margin:35px auto;padding:18px 27px;border-radius:22px;
+}
+.day-counter strong{
+  font:43px "Cormorant Garamond",serif;color:var(--cream);
+}
+.day-counter span{
+  max-width:120px;text-align:left;font-size:8px;
+  line-height:1.8;letter-spacing:2px;color:var(--muted);
+}
+.venue-placeholder{
+  padding:30px;border-radius:24px;margin-top:5px;
+}
+.venue-placeholder svg{
+  width:40px;height:40px;stroke:var(--gold);fill:none;
+}
+.venue-placeholder h3{font-size:28px;margin:15px 0 8px}
+.venue-placeholder p{
+  font-size:11px;line-height:1.9;color:var(--muted);
+}
+.map{padding:7px;border-radius:23px;overflow:hidden}
+iframe{
+  display:block;width:100%;height:290px;border:0;border-radius:17px;
+  filter:grayscale(1) invert(.9) contrast(.85);
+}
+.map-caption{
+  display:flex;justify-content:space-between;gap:15px;
+  padding:16px 10px 10px;font-size:9px;color:var(--muted);
+}
+.map-caption a{color:var(--gold)}
+.closing{padding:55px 0 10px}
+.closing .signature{font-size:59px;color:var(--cream)}
+.closing p{font-size:12px;line-height:2;color:var(--muted)}
+footer{
+  text-align:center;padding:30px 20px 100px;font-size:8px;
+  letter-spacing:2px;border-top:1px solid var(--line);
+}
+
+/* REVEALS */
+.word-wrap{
+  display:inline-block;overflow:hidden;vertical-align:bottom;
+  padding-bottom:.08em;margin-bottom:-.08em;
+}
+.word{display:inline-block}
+.js .text-reveal .word{
+  opacity:0;transform:translateY(105%) rotate(4deg);filter:blur(6px);
+  transition:transform 1.4s cubic-bezier(.16,1,.3,1),opacity 1.2s,filter 1.3s;
+  transition-delay:calc(var(--i)*65ms);
+}
+.js .text-reveal.visible .word{
+  opacity:1;transform:none;filter:none;
+}
+.js .reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity 1.3s,transform 1.4s cubic-bezier(.16,1,.3,1);
+}
+.js .reveal.visible{opacity:1;transform:none}
+
+/* 3D */
+#wedding-3d{
+  position:fixed;inset:0;width:100%;height:100%;
+  z-index:36;pointer-events:none;
+}
+.fallback-courier{
+  position:fixed;top:0;left:0;width:100px;height:130px;z-index:35;
+  pointer-events:none;transition:transform .5s ease-out;
+  filter:drop-shadow(0 0 14px #b48aff35);
+}
+.fallback-courier svg{width:100%;height:100%}
+html.three-ready .fallback-courier{display:none}
+.route-definitions{
+  position:absolute;width:0;height:0;overflow:hidden;
+}
+
+/* MUSIC AND PORTRAIT CONTROLS */
+.edit-toggle{
+  position:fixed;bottom:18px;right:18px;z-index:80;
+  padding:15px 20px;border-radius:50px;color:var(--cream);
+  font-size:9px;letter-spacing:1px;
+}
+.wedding-music{
+  position:fixed;bottom:18px;left:18px;z-index:80;
+  display:flex;align-items:center;gap:14px;
+  padding:11px 16px;border-radius:50px;
+}
+.music-toggle{
+  display:flex;align-items:center;gap:10px;border:0;
+  padding:0;background:none;color:var(--cream);
+}
+.music-icon{
+  display:grid;place-items:center;width:30px;height:30px;
+  border:1px solid #c9a55e55;border-radius:50%;font-size:11px;
+}
+.music-copy{display:grid;gap:4px;text-align:left}
+.music-copy strong{
+  font-size:9px;font-weight:400;letter-spacing:1px;
+}
+.music-copy small{
+  font-size:7px;color:#c3a8db;letter-spacing:1px;
+}
+.music-volume{
+  width:48px;height:3px;accent-color:var(--gold);cursor:pointer;
+}
+.music-bars{
+  display:flex;align-items:center;gap:3px;height:18px;
+}
+.music-bars i{
+  width:2px;height:4px;background:#d5b6ee;border-radius:2px;
+}
+.playing .music-bars i{
+  animation:music-dance 1s ease-in-out infinite alternate;
+}
+.music-bars i:nth-child(2){animation-delay:-.4s!important}
+.music-bars i:nth-child(3){animation-delay:-.7s!important}
+dialog{
+  width:min(450px,90vw);padding:34px;border-radius:28px;
+  color:var(--text);
+}
+dialog::backdrop{
+  background:#08070caa;backdrop-filter:blur(10px);
+}
+dialog h2{font-size:37px;margin:0 0 15px}
+dialog p{font-size:12px;line-height:1.8;color:var(--muted)}
+dialog label{
+  display:block;font-size:12px;margin:22px 0;color:var(--cream);
+}
+dialog input{
+  display:block;width:100%;font-size:11px;margin-top:10px;
+}
+dialog button{
+  border:1px solid #c9a55e66;padding:11px 22px;border-radius:30px;
+  background:#c9a55e12;color:var(--cream);
+}
+
+/* HORIZONTAL DESKTOP STORY */
+@media(min-width:900px){
+  .horizontal-enabled .story-shell{
+    position:relative;height:var(--story-height,400vh);
+    background:
+      radial-gradient(ellipse at 12% 30%,#713ca629,transparent 42%),
+      radial-gradient(ellipse at 85% 70%,#8f55bc1c,transparent 42%);
+  }
+  .horizontal-enabled .story-window{
+    position:sticky;top:0;height:100svh;overflow:hidden;
+  }
+  .horizontal-enabled .story-track{
+    display:flex;width:max-content;max-width:none;height:100%;
+    margin:0;padding:0;will-change:transform;
+  }
+  .horizontal-enabled .chapter{
+    flex:0 0 100vw;width:100vw;height:100%;min-height:0;
+    padding:95px 8vw 105px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7vw;
+  }
+  .horizontal-enabled .scene{
+    width:min(100%,430px);justify-self:center;
+  }
+  .horizontal-enabled .copy{max-width:480px}
+  .horizontal-enabled .chapter h3{
+    font-size:clamp(38px,4.1vw,60px);
+  }
+  .horizontal-enabled .story-navigation{
+    position:absolute;display:flex;align-items:center;
+    justify-content:space-between;gap:25px;left:6%;right:6%;z-index:5;
+  }
+  .story-navigation.top{top:28px;pointer-events:none}
+  .story-navigation.bottom{bottom:24px}
+  .story-heading{
+    font:italic 23px "Cormorant Garamond",serif;color:#d7bce9;
+  }
+  .story-instruction{
+    font-size:8px;letter-spacing:3px;color:var(--muted);
+  }
+  .story-pages{
+    display:flex;gap:4px;padding:6px;border-radius:40px;
+  }
+  .story-page{
+    border:0;border-radius:30px;background:transparent;color:#a69aad;
+    padding:12px 14px;font-size:8px;letter-spacing:1px;
+    transition:background .4s,color .4s;
+  }
+  .story-page.active{
+    color:var(--cream);background:#c6a1e51c;
+    box-shadow:inset 0 1px 0 #ffffff12;
+  }
+  .story-page span{color:#c5a2e2;margin-right:8px}
+  .story-meter{
+    width:120px;height:1px;background:#c9a55e25;overflow:hidden;
+  }
+  .story-meter-fill{
+    width:100%;height:100%;transform:scaleX(0);transform-origin:left;
+    background:linear-gradient(90deg,#b18cdd,#d9bb7f);
+  }
+}
+@media(min-width:900px) and (max-height:700px){
+  .horizontal-enabled .chapter{
+    padding-top:75px;padding-bottom:85px;
+  }
+  .horizontal-enabled .scene{width:min(100%,300px)}
+  .horizontal-enabled .copy{padding:25px}
+  .horizontal-enabled .chapter h3{font-size:38px}
+  .horizontal-enabled .chapter .number{margin-bottom:12px}
+  .horizontal-enabled .chapter p{font-size:11px;line-height:1.85}
+}
+
+/* MOBILE */
+@media(max-width:899px){
+  .site-header{
+    top:14px;width:calc(100% - 28px);
+    padding:15px 18px;border-radius:20px;
+  }
+  .site-header .signature{font-size:28px}
+  nav a:not(:last-child){display:none}
+  nav .nav-invite{
+    font-size:8px;padding:10px 12px;letter-spacing:1px;
+  }
+  .hero{padding:140px 20px 35px}
+  .hero::before{inset:120px 15px 20px}
+  .hero h1{
+    font-size:clamp(68px,15vw,110px);
+    letter-spacing:-3px;line-height:.95;
+  }
+  .hero .subtitle{
+    font-size:9px;letter-spacing:1px;max-width:330px;
+  }
+  .hero-copy .label{
+    font-size:8px;letter-spacing:2px;padding:0 15px;
+  }
+  .portrait-stage{
+    width:min(620px,100%);margin-top:35px;
+  }
+  .portraits{
+    width:100%;gap:24px;
+  }
+  .person img{
+    width:100%;height:clamp(230px,52vw,390px);
+  }
+  .portrait-label{
+    position:static;margin-top:12px;font-size:26px;
+  }
+  .halo{
+    width:min(340px,85vw);height:370px;
+  }
+  .hero-bottom{margin-top:32px}
+  .hero-names{font-size:30px}
+  .intro{padding:75px 8% 35px}
+  .story-track{padding:0 7%}
+  .chapter{
+    grid-template-columns:1fr;gap:25px;
+    padding:25px 0 50px;min-height:0;
+  }
+  .chapter .scene{width:min(350px,100%);margin:auto}
+  .copy{text-align:center;padding:28px 24px;border-radius:25px}
+  .chapter p{margin:18px auto}
+  .chapter h3{font-size:43px}
+  .chapter .number{margin:0 0 20px}
+  .scene-caption{font-size:27px}
+  .marquee{margin-top:15px}
+  .marquee-track span{font-size:32px}
+  .vow{padding:85px 8%;min-height:65svh}
+  .invitation-wrap{padding:20px 14px 45px}
+  .invitation{padding:55px 6% 30px;border-radius:28px}
+  .event{grid-template-columns:1fr}
+  .event>div{padding:20px 0}
+  .date-block{
+    order:-1;border:0;border-bottom:1px solid var(--line);margin-bottom:15px;
+  }
+  .closing .signature{font-size:44px}
+  .fallback-courier{width:72px;height:94px}
+  .edit-toggle{
+    font-size:8px;padding:13px;bottom:10px;right:10px;
+  }
+  .wedding-music{
+    left:10px;bottom:10px;padding:8px 11px;gap:8px;
+  }
+  .music-volume{width:35px}
+  .music-copy strong{font-size:8px}
+  .music-copy small{font-size:6px}
+  .music-bars{display:none}
+  .map-caption{flex-direction:column}
+}
+@media(max-width:400px){
+  .portraits{gap:18px}
+  .person img{height:225px}
+  .site-header .signature{font-size:25px}
+  .music-volume{width:28px}
+}
+
+@keyframes enter{
+  from{opacity:0;transform:translateY(25px);filter:blur(5px)}
+  to{opacity:1;transform:none;filter:none}
+}
+@keyframes gold-flow{to{background-position:220% center}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@keyframes twinkle{50%{opacity:.2}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes aurora{
+  from{opacity:.6;transform:translate(-53%,-43%) scale(.95)}
+  to{opacity:1;transform:translate(-47%,-37%) scale(1.1)}
+}
+@keyframes music-dance{to{height:17px;background:#e1c38d}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal,.js .text-reveal .word{
+    opacity:1;transform:none;filter:none;
+  }
+  .js .scene .draw{stroke-dashoffset:0}
+  #wedding-3d,.fallback-courier{display:none!important}
+}
+</style>
+</head>
+
+<body>
+<div class="progress" aria-hidden="true"></div>
+
+<svg class="route-definitions" aria-hidden="true">
+  <path id="bee-route" d="M100 360 C130 140 700 150 820 350 S170 730 180 460 S770 160 850 420 S680 740 485 330"/>
+  <path id="dragon-route" d="M890 450 C770 180 290 200 160 470 S830 760 830 410 S220 160 140 410 S330 740 515 330"/>
+</svg>
+
+<div class="fallback-courier" id="bee-fallback" aria-hidden="true">
+  <svg viewBox="0 0 120 150">
+    <g stroke="#e7cb91" stroke-width="1.4">
+      <ellipse cx="43" cy="37" rx="22" ry="13" fill="#c8b3ec55"/>
+      <ellipse cx="76" cy="35" rx="24" ry="13" fill="#c8b3ec55"/>
+      <ellipse cx="55" cy="57" rx="28" ry="18" fill="#c9a55e"/>
+      <path d="M43 42Q36 57 43 72M56 39Q49 56 56 75M69 43Q62 57 69 71" stroke="#211a14" stroke-width="7" fill="none"/>
+      <circle cx="83" cy="52" r="13" fill="#e1be77"/>
+      <circle cx="88" cy="49" r="3" fill="#080909" stroke="none"/>
+      <path d="M81 40L89 25M53 73L58 94M69 70L64 94" fill="none"/>
+      <circle cx="61" cy="116" r="20" fill="none" stroke-width="4"/>
+      <path d="M54 95L51 87L61 81L71 87L68 95Z" fill="#edddff"/>
+    </g>
+  </svg>
+</div>
+
+<div class="fallback-courier" id="dragon-fallback" aria-hidden="true">
+  <svg viewBox="0 0 120 150">
+    <g stroke="#d6bf85" stroke-width="1.2">
+      <path d="M59 47Q4 3 8 34Q10 48 58 53M61 47Q116 3 112 34Q110 48 62 53" fill="#bfa0e844"/>
+      <path d="M59 54Q9 44 16 70Q24 80 59 60M61 54Q111 44 104 70Q96 80 61 60" fill="#bfa0e844"/>
+      <path d="M60 41V85" stroke="#b58bd9" stroke-width="7"/>
+      <circle cx="60" cy="34" r="8" fill="#d8b16b"/>
+      <path d="M55 53L43 73L55 94M65 53L77 73L65 94" fill="none"/>
+      <circle cx="60" cy="116" r="20" fill="none" stroke-width="4"/>
+      <path d="M53 95L50 87L60 81L70 87L67 95Z" fill="#edddff"/>
+    </g>
+  </svg>
+</div>
+
+<header class="site-header glass">
+  <a class="signature" href="#home">Aswathi & Shareef</a>
+  <nav aria-label="Main navigation">
+    <a href="#story">Our story</a>
+    <a href="#invitation" class="nav-invite">The invitation ↗</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="starfield" aria-hidden="true"></div>
+
+  <div class="hero-copy">
+    <div class="label">The wedding of Aswathi & Shareef</div>
+    <h1><span class="gold">Beyond</span><br><em class="gold">Beliefs.</em></h1>
+    <p class="subtitle">Different beliefs. One love. One beautiful forever.</p>
+  </div>
+
+  <!-- Images occupy a separate row below the heading. -->
+  <div class="portrait-stage">
+    <div class="halo" aria-hidden="true"></div>
+
+    <div class="portraits">
+      <div class="person">
+        <img
+          id="groom-image"
+          src="./Chibi South Indian Gentleman in Traditional Attire.png"
+          alt="Shareef wearing a coral kurta and traditional mundu"
+          fetchpriority="high"
+        >
+        <div class="portrait-label">Shareef</div>
+      </div>
+
+      <div class="person">
+        <img
+          id="bride-image"
+          src="./Emerald Anarkali Chibi Portrait.png"
+          alt="Aswathi wearing an emerald Anarkali with gold embroidery"
+          fetchpriority="high"
+        >
+        <div class="portrait-label">Aswathi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date and invitation names are below the image row. -->
+  <div class="hero-bottom">
+    <div class="hero-names">Aswathi & Shareef</div>
+    <div class="date-pill glass">09 · 12 · 2026</div>
+    <a class="scroll-link" href="#story">
+      FOLLOW THE RINGS. DISCOVER OUR STORY. <span>↓</span>
+    </a>
+  </div>
+</section>
+
+<section class="intro" id="story">
+  <div class="label reveal">Our story. Our way.</div>
+  <h2 class="text-reveal">Different beginnings.<br><em>One beautiful forever.</em></h2>
+  <div class="ornament reveal">✧</div>
+  <p class="reveal">
+    Our story began at a wedding, where two strangers crossed paths
+    without knowing that life had something beautiful planned for them.
+  </p>
+</section>
+
+<section class="story-shell" aria-label="The story of Aswathi and Shareef">
+  <div class="story-window">
+
+    <div class="story-navigation top">
+      <div class="story-heading">A love beyond beliefs.</div>
+      <div class="story-instruction">KEEP SCROLLING TO FOLLOW OUR STORY →</div>
+    </div>
+
+    <div class="story-track">
+
+      <!-- CHAPTER 1 -->
+      <section class="chapter">
+        <div class="scene reveal">
+          <svg viewBox="0 0 400 390" role="img" aria-label="A wedding arch where two paths meet">
+            <g fill="none" stroke="#c9a55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="art-ring" cx="200" cy="190" r="157" opacity=".4"/>
+              <path class="draw" d="M93 291V171Q93 69 200 69Q307 69 307 171V291M111 291V172Q111 87 200 87Q289 87 289 172V291"/>
+              <path d="M81 293H124M276 293H319M119 299H282" opacity=".5"/>
+              <path d="M111 164Q155 125 200 163Q245 125 289 164" stroke="#bea0db"/>
+              <g fill="#18131c">
+                <circle cx="109" cy="154" r="11"/>
+                <circle cx="118" cy="129" r="9"/>
+                <circle cx="132" cy="107" r="10"/>
+                <circle cx="153" cy="91" r="9"/>
+                <circle cx="291" cy="154" r="11"/>
+                <circle cx="282" cy="129" r="9"/>
+                <circle cx="267" cy="107" r="10"/>
+                <circle cx="247" cy="91" r="9"/>
+              </g>
+              <g class="floating">
+                <circle cx="170" cy="211" r="13" fill="#c9a55e15"/>
+                <path d="M151 269V241Q170 222 189 241V269M170 269V290M158 290H180"/>
+                <circle cx="230" cy="211" r="13" fill="#b68adc15"/>
+                <path d="M230 226L209 272H251ZM230 272V290M218 290H242"/>
+                <path d="M187 247Q199 257 213 246"/>
+              </g>
+              <path class="spark" d="M192 184C179 173 188 162 200 173C212 162 221 173 208 184L200 190Z" fill="#c9a55e25"/>
+              <path d="M70 318Q135 302 190 307M330 318Q265 302 210 307" stroke-dasharray="3 7"/>
+            </g>
+          </svg>
+          <div class="scene-caption">Two strangers. A little destiny.</div>
+        </div>
+
+        <div class="copy glass reveal">
+          <span class="number">Chapter 01 / Where it all began</span>
+          <div class="label">A wedding. A crossing of paths.</div>
+          <h3 class="text-reveal">Someone else's wedding.<br><em>Our beginning.</em></h3>
+          <p>
+            Our story began at a wedding, where two strangers crossed paths
+            without knowing that life had something beautiful planned for them.
+          </p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2 -->
+      <section class="chapter">
+        <div class="scene reveal">
+          <svg viewBox="0 0 400 390" role="img" aria-label="An unexpected message becoming a meaningful conversation">
+            <g stroke="#c9a55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="art-ring" cx="200" cy="190" r="157" fill="none" opacity=".4"/>
+              <g transform="rotate(-8 170 185)">
+                <rect x="118" y="72" width="125" height="230" rx="18" fill="#111016"/>
+                <path d="M132 106H230M155 89H205M168 286H194" fill="none"/>
+                <path class="draw" d="M131 117V272H230V117" fill="none" opacity=".4"/>
+              </g>
+              <g class="floating">
+                <path d="M165 119H293Q306 119 306 133V176Q306 189 293 189H199L178 205V189H165Q151 189 151 176V133Q151 119 165 119Z" fill="#251b32" stroke="#bf9ae5"/>
+                <path d="M173 143H282M173 158H260M173 173H237" fill="none" stroke="#bf9ae5" opacity=".7"/>
+                <path d="M92 215H222Q235 215 235 228V254Q235 268 222 268H197L212 282L177 268H92Q78 268 78 254V228Q78 215 92 215Z" fill="#211d14"/>
+                <path d="M98 237H213M98 251H175" fill="none" opacity=".7"/>
+              </g>
+              <path class="spark" d="M280 249C262 234 275 219 287 232C300 219 313 234 295 249L287 257Z" fill="#c9a55e20"/>
+              <path d="M85 118V137M76 128H95M304 83V99M296 91H312" fill="none"/>
+            </g>
+          </svg>
+          <div class="scene-caption">One message changed everything.</div>
+        </div>
+
+        <div class="copy glass reveal">
+          <span class="number">Chapter 02 / A little closer</span>
+          <div class="label">An unexpected message</div>
+          <h3 class="text-reveal">Little conversations.<br><em>Something precious.</em></h3>
+          <p>
+            An unexpected message brought us closer, little conversations
+            turned into something precious, and somewhere along the way,
+            we became each other’s home.
+          </p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3 -->
+      <section class="chapter">
+        <div class="scene reveal">
+          <svg viewBox="0 0 400 390" role="img" aria-label="Building a business, a home, and shared dreams">
+            <g stroke="#c9a55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="art-ring" cx="200" cy="190" r="157" fill="none" opacity=".4"/>
+              <path class="draw" d="M88 277V166H246V277M76 166L99 130H236L258 166" fill="none"/>
+              <path d="M78 166H257V183Q244 198 231 183Q218 198 205 183Q192 198 179 183Q166 198 153 183Q140 198 127 183Q114 198 101 183Q88 198 78 183Z" fill="#211b15"/>
+              <path d="M108 132V165M140 132V165M173 132V165M206 132V165M235 132V165" fill="none"/>
+              <rect x="109" y="211" width="57" height="46" fill="#251a30" stroke="#b992da"/>
+              <path d="M189 277V209H227V277M82 280H254" fill="none"/>
+              <g class="floating">
+                <path d="M239 130L289 88L338 130M249 125V185H328V125" fill="#141018" stroke="#b992da"/>
+                <path d="M277 185V151H300V185" fill="none" stroke="#b992da"/>
+                <path d="M280 123C269 114 277 105 287 114C297 105 305 114 294 123L287 130Z" fill="#c9a55e25"/>
+              </g>
+              <path class="draw" d="M110 309Q166 322 204 303Q244 284 275 247L299 219" fill="none" stroke-dasharray="4 7"/>
+              <path d="M285 221L300 218L300 235" fill="none"/>
+              <path class="spark" d="M149 86V108M138 97H160M316 251V269M307 260H325" fill="none"/>
+            </g>
+          </svg>
+          <div class="scene-caption">Little moments. Big dreams. Us.</div>
+        </div>
+
+        <div class="copy glass reveal">
+          <span class="number">Chapter 03 / The world we built</span>
+          <div class="label">Partners in life. Partners in dreams.</div>
+          <h3 class="text-reveal">Building dreams.<br><em>Choosing each other.</em></h3>
+          <p>
+            From sharing little moments to building big dreams, from growing
+            a business together to creating a world of our own, we learned
+            that love is not just about finding the right person — it’s about
+            choosing each other, every single day.
+          </p>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4 -->
+      <section class="chapter">
+        <div class="scene reveal">
+          <svg viewBox="0 0 400 390" role="img" aria-label="Two different paths joining into one shared future">
+            <g fill="none" stroke="#c9a55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="art-ring" cx="200" cy="190" r="157" opacity=".4"/>
+              <path class="draw" d="M69 283Q100 225 142 245Q181 263 200 221" stroke="#b992da"/>
+              <path class="draw" d="M331 283Q300 225 258 245Q219 263 200 221"/>
+              <path d="M200 221V180" stroke-dasharray="3 7"/>
+              <g class="floating">
+                <ellipse cx="172" cy="164" rx="46" ry="52" stroke-width="3"/>
+                <ellipse cx="228" cy="164" rx="46" ry="52" stroke="#b992da" stroke-width="3"/>
+                <path d="M158 113L152 99L164 85H181L193 99L187 113Z" fill="#302519"/>
+                <path d="M215 113L209 99L221 85H238L250 99L244 113Z" fill="#2a1d36" stroke="#b992da"/>
+                <path d="M152 99H193M209 99H250"/>
+              </g>
+              <path class="spark" d="M190 279C173 265 186 252 200 266C214 252 227 265 210 279L200 288Z" fill="#c9a55e25"/>
+              <path d="M103 131V149M94 140H112M293 131V149M284 140H302"/>
+              <text x="200" y="326" text-anchor="middle" fill="#d9c5e9" stroke="none" font-family="serif" font-size="17" font-style="italic">one beautiful forever</text>
+            </g>
+          </svg>
+          <div class="scene-caption">Different worlds. The same forever.</div>
+        </div>
+
+        <div class="copy glass reveal">
+          <span class="number">Chapter 04 / Beyond beliefs</span>
+          <div class="label">A language only our hearts needed</div>
+          <h3 class="text-reveal">Different worlds.<br><em>One love.</em></h3>
+          <p>
+            We came from different worlds, but our hearts found a language
+            of their own. And today, we are ready to turn our beautiful
+            story into a lifetime together.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div class="story-navigation bottom">
+      <div class="story-pages glass" role="group" aria-label="Story chapters">
+        <button class="story-page active" aria-current="step"><span>01</span>WE MET</button>
+        <button class="story-page"><span>02</span>WE CONNECTED</button>
+        <button class="story-page"><span>03</span>WE BUILT</button>
+        <button class="story-page"><span>04</span>WE CHOSE</button>
+      </div>
+      <div class="story-meter" aria-hidden="true">
+        <div class="story-meter-fill"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Different beliefs ✧ One love ✧ One beautiful forever ✧</span>
+    <span>Different beliefs ✧ One love ✧ One beautiful forever ✧</span>
+  </div>
+</div>
+
+<section class="vow">
+  <div class="label reveal">Beyond beliefs. Beyond boundaries.</div>
+  <h2 class="text-reveal">Choosing you.<br><em>Every single day.</em></h2>
+  <p class="reveal">
+    With immense joy, we invite you to be a part of our new beginning.
+  </p>
+  <div class="signature reveal">Our story becomes our forever.</div>
+</section>
+
+<div class="invitation-wrap">
+  <section class="invitation glass" id="invitation">
+    <div class="monogram reveal">A & S</div>
+    <div class="label reveal">Together with our families</div>
+    <h2 class="text-reveal">Aswathi <em>&</em> Shareef</h2>
+
+    <p class="welcome reveal">
+      Together with our families,<br>
+      we welcome you to celebrate our love,<br>
+      bless our journey, and be part of our forever.
+    </p>
+
+    <div class="event reveal">
+      <div>
+        <div class="label">The celebration</div>
+        <h3>Our wedding</h3>
+        <p>December 9, 2026<br>Ceremony time to be announced</p>
+      </div>
+
+      <div class="date-block">
+        <div class="label">Save our date</div>
+        <div class="day">09</div>
+        <div class="month">December</div>
+        <div class="label">2026</div>
+      </div>
+
+      <div>
+        <div class="label">The setting</div>
+        <h3 id="venue-name">To be announced</h3>
+        <p id="venue-address">Venue and location details<br>will be shared soon.</p>
+      </div>
+    </div>
+
+    <div class="day-counter glass reveal">
+      <strong id="days">—</strong>
+      <span id="day-caption">DAYS UNTIL OUR WEDDING DAY</span>
+    </div>
+
+    <div class="venue-placeholder glass reveal" id="venue-placeholder">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 43S9 28 9 18a15 15 0 0 1 30 0c0 10-15 25-15 25Z" stroke-width="1.5"/>
+        <circle cx="24" cy="18" r="5" stroke-width="1.5"/>
+      </svg>
+      <h3>Our place to begin forever.</h3>
+      <p>The venue map will appear here once the location is confirmed.</p>
+    </div>
+
+    <div class="map glass" id="venue-map" hidden>
+      <iframe id="map-frame" loading="lazy" title="Wedding venue map"></iframe>
+      <div class="map-caption">
+        <span id="map-label">WEDDING VENUE</span>
+        <a id="map-link" target="_blank" rel="noopener">OPEN LOCATION ↗</a>
+      </div>
+    </div>
+
+    <div class="closing reveal">
+      <div class="signature">Aswathi & Shareef</div>
+      <p>Different beliefs. One love. One beautiful forever.</p>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  BEYOND BELIEFS &nbsp; ✧ &nbsp; ASWATHI & SHAREEF &nbsp; ✧ &nbsp; 09.12.2026
+</footer>
+
+<div class="wedding-music glass" id="wedding-music">
+  <button class="music-toggle" id="music-toggle" type="button"
+    aria-label="Play background piano and strings" aria-pressed="false">
+    <span class="music-icon" id="music-icon" aria-hidden="true">▶</span>
+    <span class="music-copy">
+      <strong>A little music?</strong>
+      <small id="music-state">PIANO & STRINGS</small>
+    </span>
+  </button>
+
+  <span class="music-bars" aria-hidden="true">
+    <i></i><i></i><i></i>
+  </span>
+
+  <input class="music-volume" id="music-volume" type="range"
+    min="0" max="100" value="35" aria-label="Background music volume">
+</div>
+
+<button class="edit-toggle glass" id="open-editor">＋ PORTRAITS</button>
+
+<dialog class="glass" id="editor">
+  <h2>Your portraits.</h2>
+  <p>
+    Your portraits load automatically when the two PNG files are beside
+    this HTML. You can also select them here.
+  </p>
+
+  <label>Shareef's portrait
+    <input id="groom-upload" type="file" accept="image/png,image/webp">
+  </label>
+
+  <label>Aswathi's portrait
+    <input id="bride-upload" type="file" accept="image/png,image/webp">
+  </label>
+
+  <p>Selections here last for this browser session.</p>
+  <p id="upload-status" role="status"></p>
+  <button id="close-editor">Done</button>
+</dialog>
+
+<!-- PAGE INTERACTIONS -->
+<script>
+(() => {
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+  /*
+   * Add the confirmed venue here.
+   * A searchable mapQuery enables the live map.
+   */
+  const venue = {
+    name: "",
+    address: "",
+    mapQuery: ""
+  };
+
+  if (venue.name) {
+    document.getElementById("venue-name").textContent = venue.name;
+  }
+  if (venue.address) {
+    document.getElementById("venue-address").textContent = venue.address;
+  }
+
+  if (venue.mapQuery) {
+    const query = encodeURIComponent(venue.mapQuery);
+
+    document.getElementById("venue-placeholder").hidden = true;
+    document.getElementById("venue-map").hidden = false;
+    document.getElementById("map-frame").src =
+      `https://maps.google.com/maps?q=${query}&z=15&output=embed`;
+    document.getElementById("map-link").href =
+      `https://www.google.com/maps/search/?api=1&query=${query}`;
+    document.getElementById("map-label").textContent =
+      (venue.name || "Wedding venue").toUpperCase();
+  }
+
+  function pageProgress() {
+    const range = document.documentElement.scrollHeight - innerHeight;
+    return range > 0 ? Math.max(0, Math.min(1, scrollY / range)) : 0;
+  }
+
+  /* Glass reflections. */
+  document.querySelectorAll(".glass").forEach(panel => {
+    panel.addEventListener("pointermove", event => {
+      if (reduced.matches || event.pointerType === "touch") return;
+
+      const rect = panel.getBoundingClientRect();
+      panel.style.setProperty(
+        "--mx",
+        `${(event.clientX - rect.left) / rect.width * 100}%`
+      );
+      panel.style.setProperty(
+        "--my",
+        `${(event.clientY - rect.top) / rect.height * 100}%`
+      );
+    });
+  });
+
+  /* Staggered typography. */
+  document.querySelectorAll(".text-reveal").forEach(heading => {
+    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+
+    let index = 0;
+
+    nodes.forEach(node => {
+      const fragment = document.createDocumentFragment();
+
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+
+        if (/^\s+$/.test(part)) {
+          fragment.append(document.createTextNode(part));
+          return;
+        }
+
+        const wrap = document.createElement("span");
+        wrap.className = "word-wrap";
+
+        const word = document.createElement("span");
+        word.className = "word";
+        word.style.setProperty("--i", index++);
+        word.textContent = part;
+
+        wrap.append(word);
+        fragment.append(wrap);
+      });
+
+      node.replaceWith(fragment);
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    document.documentElement.classList.add("js");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .1 });
+
+    document.querySelectorAll(".reveal,.text-reveal").forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  /* Stars. */
+  const starfield = document.querySelector(".starfield");
+
+  for (let i = 0; i < 42; i++) {
+    const star = document.createElement("i");
+    star.style.left = `${(i * 37.71) % 100}%`;
+    star.style.top = `${(i * 23.83) % 100}%`;
+    star.style.setProperty("--duration", `${3 + i % 5}s`);
+    star.style.setProperty("--delay", `${-(i % 7)}s`);
+    starfield.append(star);
+  }
+
+  /* Horizontal storytelling. */
+  const desktop = matchMedia("(min-width: 900px)");
+  const shell = document.querySelector(".story-shell");
+  const storyWindow = document.querySelector(".story-window");
+  const track = document.querySelector(".story-track");
+  const chapters = [...document.querySelectorAll(".chapter")];
+  const buttons = [...document.querySelectorAll(".story-page")];
+  const meter = document.querySelector(".story-meter-fill");
+
+  let travel = 0;
+  let current = 0;
+  let target = 0;
+  let frame = 0;
+  let previousTime = 0;
+  let activeIndex = -1;
+
+  const horizontalEnabled = () => desktop.matches && !reduced.matches;
+
+  function paintStory() {
+    track.style.transform = `translate3d(${-current}px,0,0)`;
+
+    const progress = travel > 0 ? current / travel : 0;
+    meter.style.transform = `scaleX(${progress})`;
+
+    const index = Math.min(
+      chapters.length - 1,
+      Math.round(progress * (chapters.length - 1))
+    );
+
+    if (index !== activeIndex) {
+      activeIndex = index;
+
+      buttons.forEach((button, i) => {
+        button.classList.toggle("active", i === index);
+
+        if (i === index) button.setAttribute("aria-current", "step");
+        else button.removeAttribute("aria-current");
+      });
+    }
+  }
+
+  function animateStory(time) {
+    const delta = previousTime ? Math.min(time - previousTime, 50) : 16.67;
+    previousTime = time;
+
+    current += (target - current) * (1 - Math.exp(-delta / 85));
+
+    if (Math.abs(target - current) < .15) current = target;
+
+    paintStory();
+
+    if (current !== target) {
+      frame = requestAnimationFrame(animateStory);
+    } else {
+      frame = 0;
+      previousTime = 0;
+    }
+  }
+
+  function syncStory(immediate = false) {
+    if (!horizontalEnabled()) return;
+
+    const bounds = shell.getBoundingClientRect();
+    target = Math.max(0, Math.min(travel, -bounds.top));
+
+    if (immediate || bounds.top > innerHeight || bounds.bottom < 0) {
+      if (frame) cancelAnimationFrame(frame);
+
+      frame = 0;
+      previousTime = 0;
+      current = target;
+      paintStory();
+    } else if (!frame) {
+      frame = requestAnimationFrame(animateStory);
+    }
+  }
+
+  const progressBar = document.querySelector(".progress");
+  const fallbacks = [
+    {
+      element: document.getElementById("bee-fallback"),
+      path: document.getElementById("bee-route")
+    },
+    {
+      element: document.getElementById("dragon-fallback"),
+      path: document.getElementById("dragon-route")
+    }
+  ];
+
+  function updatePage() {
+    const fraction = pageProgress();
+    progressBar.style.width = `${fraction * 100}%`;
+
+    if (!document.documentElement.classList.contains("three-ready")) {
+      fallbacks.forEach(({ element, path }) => {
+        const point = path.getPointAtLength(fraction * path.getTotalLength());
+        const margin = innerWidth < 760 ? 50 : 90;
+        const x = margin + point.x / 1000 * (innerWidth - margin * 2);
+        const y = 45 + point.y / 1000 * (innerHeight - 110);
+
+        element.style.transform =
+          `translate3d(${x - element.offsetWidth / 2}px,${y - element.offsetHeight / 2}px,0)`;
+      });
+    }
+  }
+
+  function layoutStory() {
+    if (frame) cancelAnimationFrame(frame);
+
+    frame = 0;
+    previousTime = 0;
+
+    document.documentElement.classList.toggle(
+      "horizontal-enabled",
+      horizontalEnabled()
+    );
+
+    if (!horizontalEnabled()) {
+      shell.style.removeProperty("--story-height");
+      track.style.removeProperty("transform");
+      current = target = 0;
+    } else {
+      travel = Math.max(0, track.scrollWidth - storyWindow.clientWidth);
+      shell.style.setProperty(
+        "--story-height",
+        `${storyWindow.clientHeight + travel}px`
+      );
+      syncStory(true);
+    }
+
+    updatePage();
+  }
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      if (!horizontalEnabled()) {
+        chapters[index].scrollIntoView({
+          behavior: reduced.matches ? "auto" : "smooth",
+          block: "center"
+        });
+        return;
+      }
+
+      const top = shell.getBoundingClientRect().top + scrollY;
+
+      scrollTo({
+        top: top + travel * index / (chapters.length - 1),
+        behavior: "smooth"
+      });
+    });
+  });
+
+  addEventListener("scroll", () => {
+    syncStory();
+    updatePage();
+  }, { passive: true });
+
+  addEventListener("resize", layoutStory);
+  desktop.addEventListener("change", layoutStory);
+  reduced.addEventListener("change", layoutStory);
+
+  layoutStory();
+
+  if (document.fonts) document.fonts.ready.then(layoutStory);
+  addEventListener("load", layoutStory, { once: true });
+
+  /* Date-only countdown in India time. */
+  const weddingCalendarDay = Date.UTC(2026, 11, 9);
+
+  function updateDays() {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kolkata",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+
+    const values = Object.fromEntries(
+      parts.map(part => [part.type, part.value])
+    );
+
+    const today = Date.UTC(
+      Number(values.year),
+      Number(values.month) - 1,
+      Number(values.day)
+    );
+
+    const days = Math.round((weddingCalendarDay - today) / 86400000);
+
+    document.getElementById("days").textContent = Math.max(0, days);
+    document.getElementById("day-caption").textContent =
+      days > 0 ? "DAYS UNTIL OUR WEDDING DAY" :
+      days === 0 ? "TODAY, OUR FOREVER BEGINS" :
+      "OUR FOREVER HAS BEGUN";
+  }
+
+  updateDays();
+  setInterval(updateDays, 60000);
+
+  /* Portrait selection. */
+  const editor = document.getElementById("editor");
+  document.getElementById("open-editor").onclick = () => editor.showModal();
+  document.getElementById("close-editor").onclick = () => editor.close();
+
+  const urls = {};
+  const versions = { groom: 0, bride: 0 };
+
+  ["groom", "bride"].forEach(person => {
+    const image = document.getElementById(`${person}-image`);
+
+    image.addEventListener("error", () => {
+      document.getElementById("upload-status").textContent =
+        "Keep both original PNG files beside this HTML, or select them here.";
+    });
+
+    document.getElementById(`${person}-upload`).addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const status = document.getElementById("upload-status");
+
+      if (!["image/png", "image/webp"].includes(file.type)) {
+        status.textContent = "Please choose a PNG or WebP image.";
+        return;
+      }
+
+      const version = ++versions[person];
+      const url = URL.createObjectURL(file);
+      const check = new Image();
+
+      check.onload = () => {
+        if (version !== versions[person]) {
+          URL.revokeObjectURL(url);
+          return;
+        }
+
+        if (urls[person]) URL.revokeObjectURL(urls[person]);
+        urls[person] = url;
+        image.src = url;
+        status.textContent = "Portrait added.";
+      };
+
+      check.onerror = () => {
+        URL.revokeObjectURL(url);
+
+        if (version === versions[person]) {
+          status.textContent = "Please choose another image.";
+        }
+      };
+
+      check.src = url;
+    });
+  });
+})();
+</script>
+
+<!-- PIANO + SYNTHESIZED VIOLIN-STYLE MUSIC -->
+<script>
+(() => {
+  const panel = document.getElementById("wedding-music");
+  const button = document.getElementById("music-toggle");
+  const icon = document.getElementById("music-icon");
+  const label = document.getElementById("music-state");
+  const volume = document.getElementById("music-volume");
+
+  let context, master, pianoBus, stringBus, stringWave, timer;
+  let playing = false;
+  let busy = false;
+  let step = 0;
+  let nextTime = 0;
+
+  const beat = 60 / 72;
+  const eighth = beat / 2;
+  const frequency = midi => 440 * Math.pow(2, (midi - 69) / 12);
+
+  const chords = [
+    [48,55,60,64,67],[47,55,59,62,67],[45,52,57,60,64],[41,48,53,57,60],
+    [40,48,52,55,60],[43,50,55,59,62],[41,48,53,57,60],[43,50,55,60,62],
+    [48,55,60,64,67],[47,55,59,62,67],[45,52,57,60,64],[41,48,53,57,60],
+    [50,57,60,65,69],[43,50,55,59,62],[41,48,53,57,60],[48,55,60,64,67]
+  ];
+
+  const melody = [
+    [72,76],[74,71],[72,69],[69,72],
+    [76,79],[74,71],[72,69],[67,74],
+    [76,79],[77,74],[76,72],[72,69],
+    [74,77],[74,71],[69,72],[72,null]
+  ];
+
+  const pattern = [0,2,3,4,1,3,2,4];
+
+  function initialize() {
+    const AudioClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioClass) throw new Error("Web Audio unavailable.");
+
+    context = new AudioClass();
+
+    master = context.createGain();
+    master.gain.value = 0;
+
+    const warmth = context.createBiquadFilter();
+    warmth.type = "lowpass";
+    warmth.frequency.value = 6500;
+    warmth.Q.value = .4;
+
+    const compressor = context.createDynamicsCompressor();
+    compressor.threshold.value = -20;
+    compressor.knee.value = 20;
+    compressor.ratio.value = 2.5;
+    compressor.attack.value = .015;
+    compressor.release.value = .35;
+
+    master.connect(warmth);
+    warmth.connect(compressor);
+    compressor.connect(context.destination);
+
+    const length = Math.floor(context.sampleRate * 3.2);
+    const impulse = context.createBuffer(2, length, context.sampleRate);
+    let seed = 317;
+
+    for (let channel = 0; channel < 2; channel++) {
+      const data = impulse.getChannelData(channel);
+
+      for (let i = 0; i < length; i++) {
+        seed = seed * 16807 % 2147483647;
+        const random = (seed - 1) / 2147483646;
+        data[i] = (random * 2 - 1) * Math.pow(1 - i / length, 3.5);
+      }
+    }
+
+    const reverb = context.createConvolver();
+    reverb.buffer = impulse;
+
+    const wet = context.createGain();
+    wet.gain.value = .24;
+    reverb.connect(wet);
+    wet.connect(master);
+
+    pianoBus = context.createGain();
+    pianoBus.gain.value = .75;
+    pianoBus.connect(master);
+    pianoBus.connect(reverb);
+
+    stringBus = context.createGain();
+    stringBus.gain.value = .38;
+    stringBus.connect(master);
+
+    const send = context.createGain();
+    send.gain.value = .85;
+    stringBus.connect(send);
+    send.connect(reverb);
+
+    const real = new Float32Array(14);
+    const imaginary = new Float32Array(14);
+
+    for (let h = 1; h < 14; h++) {
+      imaginary[h] = 1 / Math.pow(h, 1.45);
+    }
+
+    stringWave = context.createPeriodicWave(real, imaginary);
+    nextTime = context.currentTime + .15;
+  }
+
+  function piano(midi, start, velocity) {
+    const partials = [
+      [1,1,2.2],[2,.34,1.5],[3,.13,1],
+      [4.005,.06,.7],[5.01,.025,.45]
+    ];
+
+    partials.forEach(([ratio, level, decay]) => {
+      const oscillator = context.createOscillator();
+      const envelope = context.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.value = frequency(midi) * ratio;
+
+      envelope.gain.setValueAtTime(0, start);
+      envelope.gain.linearRampToValueAtTime(
+        .14 * velocity * level, start + .008
+      );
+      envelope.gain.exponentialRampToValueAtTime(.0001, start + decay);
+      envelope.gain.linearRampToValueAtTime(0, start + decay + .08);
+
+      oscillator.connect(envelope);
+      envelope.connect(pianoBus);
+      oscillator.start(start);
+      oscillator.stop(start + decay + .1);
+
+      oscillator.onended = () => {
+        oscillator.disconnect();
+        envelope.disconnect();
+      };
+    });
+  }
+
+  function violin(midi, start, duration, intensity = 1) {
+    if (midi === null) return;
+
+    const oscillator = context.createOscillator();
+    oscillator.setPeriodicWave(stringWave);
+    oscillator.frequency.value = frequency(midi);
+
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 2800;
+    filter.Q.value = .5;
+
+    const envelope = context.createGain();
+    const peak = .11 * intensity;
+
+    envelope.gain.setValueAtTime(0, start);
+    envelope.gain.linearRampToValueAtTime(
+      peak, start + Math.min(.3, duration * .22)
+    );
+    envelope.gain.linearRampToValueAtTime(
+      peak * .8, start + duration * .76
+    );
+    envelope.gain.linearRampToValueAtTime(0, start + duration + .25);
+
+    const vibrato = context.createOscillator();
+    const depth = context.createGain();
+
+    vibrato.frequency.value = 5.1;
+    depth.gain.setValueAtTime(0, start);
+    depth.gain.linearRampToValueAtTime(7, start + .45);
+
+    vibrato.connect(depth);
+    depth.connect(oscillator.detune);
+    oscillator.connect(filter);
+    filter.connect(envelope);
+    envelope.connect(stringBus);
+
+    oscillator.start(start);
+    vibrato.start(start);
+    oscillator.stop(start + duration + .3);
+    vibrato.stop(start + duration + .3);
+
+    oscillator.onended = () => {
+      oscillator.disconnect();
+      filter.disconnect();
+      envelope.disconnect();
+      vibrato.disconnect();
+      depth.disconnect();
+    };
+  }
+
+  function scheduleStep(index, time) {
+    const bar = Math.floor(index / 8) % chords.length;
+    const position = index % 8;
+    const chord = chords[bar];
+    const velocity = [.76,.44,.52,.43,.62,.46,.51,.4][position];
+
+    piano(chord[pattern[position]], time, velocity);
+
+    if (position === 6 && bar % 4 === 3) {
+      piano(chord[2] + 12, time + .025, .25);
+    }
+
+    if (position === 0 || position === 4) {
+      const phrase = position === 0 ? 0 : 1;
+      const duration =
+        bar === 15 && phrase === 0 ? beat * 3.7 : beat * 1.85;
+
+      violin(melody[bar][phrase], time + .025, duration, .85);
+    }
+
+    if (position === 0 && bar % 2 === 0) {
+      violin(chord[2], time + .08, beat * 3.4, .23);
+      violin(chord[3], time + .1, beat * 3.4, .18);
+    }
+  }
+
+  function scheduler() {
+    if (!playing) return;
+
+    if (nextTime < context.currentTime) {
+      nextTime = context.currentTime + .04;
+    }
+
+    while (nextTime < context.currentTime + .2) {
+      scheduleStep(step, nextTime);
+      step = (step + 1) % (chords.length * 8);
+      nextTime += eighth;
+    }
+  }
+
+  function setInterface(active) {
+    panel.classList.toggle("playing", active);
+    button.setAttribute("aria-pressed", String(active));
+    button.setAttribute(
+      "aria-label",
+      active
+        ? "Pause background piano and strings"
+        : "Play background piano and strings"
+    );
+
+    icon.textContent = active ? "Ⅱ" : "▶";
+    label.textContent = active ? "OUR LITTLE SYMPHONY" : "PIANO & STRINGS";
+  }
+
+  async function play() {
+    if (busy || playing) return;
+    busy = true;
+
+    try {
+      if (!context) initialize();
+
+      await context.resume();
+
+      if (context.state !== "running") {
+        throw new Error("Audio could not start.");
+      }
+
+      playing = true;
+
+      const now = context.currentTime;
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(0, now);
+      master.gain.linearRampToValueAtTime(
+        Number(volume.value) / 100 * .8,
+        now + 1.1
+      );
+
+      scheduler();
+      timer = setInterval(scheduler, 80);
+      setInterface(true);
+    } catch (error) {
+      label.textContent = "TAP TO TRY AGAIN";
+      console.warn(error);
+    } finally {
+      busy = false;
+      if (document.hidden && playing) pause();
+    }
+  }
+
+  async function pause() {
+    if (busy || !playing) return;
+
+    busy = true;
+    playing = false;
+    clearInterval(timer);
+
+    try {
+      const now = context.currentTime;
+      const gain = master.gain.value;
+
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(gain, now);
+      master.gain.linearRampToValueAtTime(0, now + .18);
+
+      await new Promise(resolve => setTimeout(resolve, 220));
+      await context.suspend();
+    } finally {
+      setInterface(false);
+      busy = false;
+    }
+  }
+
+  button.addEventListener("click", () => playing ? pause() : play());
+
+  volume.addEventListener("input", () => {
+    if (!context || !playing) return;
+
+    const now = context.currentTime;
+    const gain = master.gain.value;
+
+    master.gain.cancelScheduledValues(now);
+    master.gain.setValueAtTime(gain, now);
+    master.gain.linearRampToValueAtTime(
+      Number(volume.value) / 100 * .8,
+      now + .15
+    );
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && playing) pause();
+  });
+})();
+</script>
+
+<!-- REAL-TIME 3D -->
+<script type="module">
+(async () => {
+  let renderer, canvas;
+
+  try {
+    const THREE = await import("three");
+    const { RoomEnvironment } = await import(
+      "three/addons/environments/RoomEnvironment.js"
+    );
+
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+    canvas = document.createElement("canvas");
+    canvas.id = "wedding-3d";
+    canvas.setAttribute("aria-hidden", "true");
+
+    renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: "high-performance"
+    });
+
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(
+      -innerWidth / 2,
+      innerWidth / 2,
+      innerHeight / 2,
+      -innerHeight / 2,
+      1,
+      2000
+    );
+    camera.position.z = 1000;
+
+    const room = new RoomEnvironment();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const environment = pmrem.fromScene(room, .04);
+
+    scene.environment = environment.texture;
+    room.dispose();
+    pmrem.dispose();
+
+    scene.add(new THREE.AmbientLight(0xe5d3ff, .8));
+
+    const warmLight = new THREE.DirectionalLight(0xffe2a8, 3.5);
+    warmLight.position.set(-300, 500, 600);
+    scene.add(warmLight);
+
+    const purpleLight = new THREE.DirectionalLight(0xb48aff, 2.8);
+    purpleLight.position.set(400, -100, 300);
+    scene.add(purpleLight);
+
+    const rim = new THREE.DirectionalLight(0xffffff, 2);
+    rim.position.set(0, 250, -250);
+    scene.add(rim);
+
+    const gold = new THREE.MeshPhysicalMaterial({
+      color: 0xd9ad58,
+      metalness: 1,
+      roughness: .19,
+      clearcoat: 1,
+      clearcoatRoughness: .15,
+      envMapIntensity: 1.4
+    });
+
+    const paleGold = new THREE.MeshPhysicalMaterial({
+      color: 0xf0d59c,
+      metalness: .85,
+      roughness: .23,
+      clearcoat: 1
+    });
+
+    const dark = new THREE.MeshStandardMaterial({
+      color: 0x211a14,
+      metalness: .3,
+      roughness: .35
+    });
+
+    const eye = new THREE.MeshPhysicalMaterial({
+      color: 0x151019,
+      metalness: .45,
+      roughness: .08,
+      clearcoat: 1
+    });
+
+    const purple = new THREE.MeshPhysicalMaterial({
+      color: 0x8351bc,
+      metalness: .8,
+      roughness: .22,
+      clearcoat: 1,
+      iridescence: .65,
+      iridescenceIOR: 1.3
+    });
+
+    const wingMaterial = new THREE.MeshPhysicalMaterial({
+      color: 0xe5d7ff,
+      metalness: .18,
+      roughness: .16,
+      transparent: true,
+      opacity: .52,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+      clearcoat: 1,
+      iridescence: 1,
+      iridescenceIOR: 1.35
+    });
+
+    const diamond = new THREE.MeshPhysicalMaterial({
+      color: 0xf2e4ff,
+      metalness: .12,
+      roughness: .06,
+      clearcoat: 1,
+      iridescence: .4,
+      flatShading: true,
+      envMapIntensity: 1.8
+    });
+
+    const veinMaterial = new THREE.LineBasicMaterial({
+      color: 0xe7cb91,
+      transparent: true,
+      opacity: .48
+    });
+
+    const sphereGeometry = new THREE.SphereGeometry(1, 24, 16);
+    const wings = [];
+
+    function sphere(parent, material, position, scale) {
+      const mesh = new THREE.Mesh(sphereGeometry, material);
+      mesh.position.set(...position);
+      mesh.scale.set(...scale);
+      parent.add(mesh);
+      return mesh;
+    }
+
+    function tube(parent, coordinates, radius = .018, material = gold) {
+      const curve = new THREE.CatmullRomCurve3(
+        coordinates.map(point => new THREE.Vector3(...point))
+      );
+
+      const mesh = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 16, radius, 6, false),
+        material
+      );
+
+      parent.add(mesh);
+      return mesh;
+    }
+
+    function makeWing(parent, position, length, width, angle, phase) {
+      const pivot = new THREE.Group();
+      pivot.position.set(...position);
+      pivot.rotation.z = angle;
+      parent.add(pivot);
+
+      const surface = new THREE.Mesh(sphereGeometry, wingMaterial);
+      surface.position.y = length / 2;
+      surface.scale.set(width, length / 2, .025);
+      pivot.add(surface);
+
+      for (let i = -1; i <= 1; i++) {
+        const curve = new THREE.CatmullRomCurve3([
+          new THREE.Vector3(0, .03, .028),
+          new THREE.Vector3(i * width * .6, length * .45, .028),
+          new THREE.Vector3(i * width * .35, length * .85, .028)
+        ]);
+
+        pivot.add(new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(curve.getPoints(15)),
+          veinMaterial
+        ));
+      }
+
+      wings.push({ pivot, phase });
+    }
+
+    function makeRing() {
+      const ring = new THREE.Group();
+
+      ring.add(new THREE.Mesh(
+        new THREE.TorusGeometry(.37, .046, 12, 64),
+        gold
+      ));
+
+      const inner = new THREE.Mesh(
+        new THREE.TorusGeometry(.337, .009, 8, 48),
+        paleGold
+      );
+      inner.position.z = .025;
+      ring.add(inner);
+
+      const stone = new THREE.Mesh(
+        new THREE.OctahedronGeometry(.18, 0),
+        diamond
+      );
+
+      stone.position.set(0, .43, .055);
+      stone.scale.set(1, .86, .85);
+      stone.rotation.z = Math.PI / 4;
+      ring.add(stone);
+
+      [-1, 1].forEach(side => {
+        [-1, 1].forEach(depth => {
+          tube(ring, [
+            [side * .11, .32, depth * .055],
+            [side * .13, .42, depth * .075],
+            [side * .09, .49, depth * .055]
+          ], .012);
+        });
+      });
+
+      return ring;
+    }
+
+    /* BEE */
+    const bee = new THREE.Group();
+    const beeBody = new THREE.Group();
+    bee.add(beeBody);
+    scene.add(bee);
+
+    sphere(beeBody, gold, [-.29, .22, 0], [.58, .34, .34]);
+
+    [-.59, -.31, -.04].forEach(x => {
+      const relative = (x + .29) / .58;
+      const radius = .34 * Math.sqrt(1 - relative * relative);
+
+      const stripe = new THREE.Mesh(
+        new THREE.TorusGeometry(radius, .048, 8, 36),
+        dark
+      );
+      stripe.rotation.y = Math.PI / 2;
+      stripe.position.set(x, .22, 0);
+      beeBody.add(stripe);
+    });
+
+    sphere(beeBody, dark, [.28, .27, 0], [.29, .29, .29]);
+    sphere(beeBody, paleGold, [.57, .34, .03], [.27, .25, .25]);
+    sphere(beeBody, eye, [.71, .39, .2], [.075, .095, .055]);
+    sphere(beeBody, diamond, [.735, .425, .245], [.017, .017, .012]);
+
+    tube(beeBody, [[.55,.55,.1],[.6,.77,.1],[.76,.82,.08]]);
+    tube(beeBody, [[.42,.55,-.08],[.39,.75,-.08],[.5,.87,-.07]]);
+
+    sphere(beeBody, gold, [.76,.82,.08], [.035,.035,.035]);
+    sphere(beeBody, gold, [.5,.87,-.07], [.035,.035,.035]);
+
+    const stinger = new THREE.Mesh(
+      new THREE.ConeGeometry(.1,.24,12),
+      dark
+    );
+    stinger.rotation.z = Math.PI / 2;
+    stinger.position.set(-.92,.22,0);
+    beeBody.add(stinger);
+
+    makeWing(beeBody, [-.07,.46,-.1], .9,.25,.7,0);
+    makeWing(beeBody, [.03,.48,.12], .92,.26,-.55,Math.PI);
+
+    tube(beeBody, [[.23,.05,.18],[.42,-.23,.2],[.15,-.46,.1]]);
+    tube(beeBody, [[-.13,-.01,.18],[-.28,-.25,.25],[.05,-.46,.1]]);
+    tube(beeBody, [[-.44,.01,-.1],[-.64,-.18,-.1],[-.5,-.31,0]], .014, dark);
+
+    const beeRing = makeRing();
+    beeRing.position.set(.1,-.91,.12);
+    bee.add(beeRing);
+
+    /* DRAGONFLY */
+    const dragonfly = new THREE.Group();
+    const dragonBody = new THREE.Group();
+    dragonfly.add(dragonBody);
+    scene.add(dragonfly);
+
+    sphere(dragonBody, purple, [0,.26,0], [.14,.32,.16]);
+    sphere(dragonBody, gold, [0,.61,0], [.18,.16,.16]);
+    sphere(dragonBody, purple, [-.11,.65,.12], [.1,.11,.095]);
+    sphere(dragonBody, purple, [.11,.65,.12], [.1,.11,.095]);
+
+    for (let i = 0; i < 7; i++) {
+      const radius = .09 - i * .007;
+
+      sphere(
+        dragonBody,
+        i % 2 ? gold : purple,
+        [0,-.04-i*.085,0],
+        [radius,.07,radius]
+      );
+    }
+
+    makeWing(dragonBody, [-.07,.38,0], 1.2,.19,1.05,0);
+    makeWing(dragonBody, [.07,.38,0], 1.2,.19,-1.05,Math.PI);
+    makeWing(dragonBody, [-.07,.19,0], 1,.2,1.9,Math.PI/2);
+    makeWing(dragonBody, [.07,.19,0], 1,.2,-1.9,-Math.PI/2);
+
+    tube(dragonBody, [[-.08,.24,.12],[-.35,-.06,.2],[-.12,-.64,.16]], .014);
+    tube(dragonBody, [[.08,.24,.12],[.35,-.06,.2],[.12,-.64,.16]], .014);
+
+    const dragonRing = makeRing();
+    dragonRing.position.set(0,-1.1,.16);
+    dragonfly.add(dragonRing);
+
+    /* FLOATING CRYSTALS */
+    const ornaments = [];
+
+    [[.055,.22],[.94,.31],[.07,.78],[.93,.84]].forEach(([x,y], index) => {
+      const group = new THREE.Group();
+
+      const crystal = new THREE.Mesh(
+        new THREE.OctahedronGeometry(1,0),
+        index % 2 ? gold : purple
+      );
+      crystal.scale.set(.65,1.25,.65);
+      group.add(crystal);
+
+      const orbit = new THREE.Mesh(
+        new THREE.TorusGeometry(1.45,.018,6,48),
+        paleGold
+      );
+      orbit.rotation.x = 1.1;
+      orbit.rotation.y = .35;
+      group.add(orbit);
+
+      scene.add(group);
+      ornaments.push({ group, x, y, index });
+    });
+
+    /* GOLD DUST */
+    const positions = [];
+
+    for (let i = 0; i < 55; i++) {
+      const side = i % 2 ? 1 : -1;
+
+      positions.push(
+        side * (.35 + (i * .137) % .14),
+        (i * .173) % 1 - .5,
+        (i % 7) * 12
+      );
+    }
+
+    const dustGeometry = new THREE.BufferGeometry();
+    dustGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(positions, 3)
+    );
+
+    const dust = new THREE.Points(
+      dustGeometry,
+      new THREE.PointsMaterial({
+        color: 0xdcc28a,
+        size: 1.6,
+        transparent: true,
+        opacity: .5,
+        depthWrite: false,
+        sizeAttenuation: false
+      })
+    );
+    scene.add(dust);
+
+    const beePath = document.getElementById("bee-route");
+    const dragonPath = document.getElementById("dragon-route");
+
+    const lengths = new Map([
+      [beePath, beePath.getTotalLength()],
+      [dragonPath, dragonPath.getTotalLength()]
+    ]);
+
+    function pathPoint(path, fraction) {
+      const point = path.getPointAtLength(fraction * lengths.get(path));
+      return { x: point.x / 1000, y: point.y / 1000 };
+    }
+
+    function placeCourier(group, path, fraction, time, opposite) {
+      const point = pathPoint(path, fraction);
+      const next = pathPoint(path, Math.min(1, fraction + .002));
+
+      const margin = innerWidth < 760 ? 50 : 90;
+      const x = margin + point.x * (innerWidth - margin * 2);
+      const y = 45 + point.y * (innerHeight - 110);
+
+      group.position.set(
+        x - innerWidth / 2,
+        innerHeight / 2 - y + Math.sin(time * 2 + (opposite ? 2 : 0)) * 4,
+        60
+      );
+
+      group.rotation.z = THREE.MathUtils.clamp(
+        (next.y - point.y) * -18,
+        -.28,
+        .28
+      );
+      group.rotation.y =
+        Math.sin(time * .65 + fraction * 8 + (opposite ? 2 : 0)) * .32;
+      group.rotation.x = .08 + Math.sin(time * .8) * .05;
+    }
+
+    function scrollFraction() {
+      const range = document.documentElement.scrollHeight - innerHeight;
+      return range > 0 ? THREE.MathUtils.clamp(scrollY / range, 0, 1) : 0;
+    }
+
+    let currentScroll = scrollFraction();
+    let previousTime = 0;
+    let elapsed = 0;
+    let frame = 0;
+    let contextLost = false;
+
+    function resize() {
+      renderer.setPixelRatio(
+        Math.min(devicePixelRatio, innerWidth < 760 ? 1.25 : 1.5)
+      );
+      renderer.setSize(innerWidth, innerHeight);
+
+      camera.left = -innerWidth / 2;
+      camera.right = innerWidth / 2;
+      camera.top = innerHeight / 2;
+      camera.bottom = -innerHeight / 2;
+      camera.updateProjectionMatrix();
+
+      const size = innerWidth < 760 ? 31 : 47;
+      bee.scale.setScalar(size);
+      dragonfly.scale.setScalar(size);
+      dust.scale.set(innerWidth, innerHeight, 1);
+    }
+
+    function updateScene(time, delta) {
+      currentScroll +=
+        (scrollFraction() - currentScroll) * (1 - Math.exp(-delta / .1));
+
+      placeCourier(bee, beePath, currentScroll, time, false);
+      placeCourier(dragonfly, dragonPath, currentScroll, time, true);
+
+      wings.forEach(({ pivot, phase }, index) => {
+        pivot.rotation.x =
+          .35 + Math.sin(time * (index < 2 ? 28 : 38) + phase) * .65;
+      });
+
+      beeRing.rotation.z = Math.sin(time * 2) * .1;
+      beeRing.rotation.y = Math.sin(time * .8) * .3;
+      dragonRing.rotation.z = Math.sin(time * 1.8 + 1.5) * .12;
+      dragonRing.rotation.y = Math.sin(time * .7 + 2) * .35;
+
+      ornaments.forEach(({ group, x, y, index }) => {
+        group.visible = innerWidth >= 760 || index < 2;
+
+        group.position.set(
+          (x - .5) * innerWidth,
+          (.5 - y) * innerHeight + Math.sin(time * .55 + index) * 15,
+          -40
+        );
+
+        group.scale.setScalar(innerWidth < 760 ? 10 : 15 + index * 2);
+        group.rotation.x = time * .13 + index;
+        group.rotation.y = time * .19 + index;
+        group.rotation.z = Math.sin(time * .3 + index) * .15;
+      });
+
+      dust.rotation.z = Math.sin(time * .07) * .025;
+    }
+
+    function animate(now) {
+      frame = 0;
+
+      if (document.hidden || reduced.matches || contextLost) {
+        previousTime = 0;
+        return;
+      }
+
+      const delta = previousTime
+        ? Math.min((now - previousTime) / 1000, .05)
+        : 1 / 60;
+
+      previousTime = now;
+      elapsed += delta;
+
+      updateScene(elapsed, delta);
+      renderer.render(scene, camera);
+      frame = requestAnimationFrame(animate);
+    }
+
+    function resume() {
+      if (!frame && !document.hidden && !reduced.matches && !contextLost) {
+        previousTime = 0;
+        frame = requestAnimationFrame(animate);
+      }
+    }
+
+    addEventListener("resize", resize);
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        previousTime = 0;
+      } else {
+        resume();
+      }
+    });
+
+    reduced.addEventListener("change", () => {
+      if (reduced.matches && frame) {
+        cancelAnimationFrame(frame);
+        frame = 0;
+      } else {
+        resume();
+      }
+    });
+
+    canvas.addEventListener("webglcontextlost", event => {
+      event.preventDefault();
+      contextLost = true;
+      canvas.style.visibility = "hidden";
+      document.documentElement.classList.remove("three-ready");
+
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    });
+
+    canvas.addEventListener("webglcontextrestored", () => {
+      contextLost = false;
+      canvas.style.visibility = "";
+      document.documentElement.classList.add("three-ready");
+      resume();
+    });
+
+    resize();
+    updateScene(0, 1);
+    renderer.render(scene, camera);
+
+    document.body.append(canvas);
+    document.documentElement.classList.add("three-ready");
+    resume();
+
+  } catch (error) {
+    document.documentElement.classList.remove("three-ready");
+    canvas?.remove();
+    renderer?.dispose();
+    console.warn("3D unavailable; illustrated couriers retained.", error);
+  }
+})();
+</script>
+</body>
+</html>
